@@ -1,0 +1,275 @@
+{% extends 'adminNavbar.html' %}
+{% block main %}
+{% load static %}
+
+<section class="content-header">
+    <h1 align="center">
+       <i class="fa fa-motorcycle"></i> Update Vehicle
+        <small></small>
+    </h1>
+</section>
+
+<section class="content">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+         <div class="box-header">
+           <h3 class="box-title"><i class="fa fa-motorcycle"></i> Update Vehicle</h3>
+             <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+              <div class="modal-body">
+                  <div class="box box-primary">
+                    <div class="box-body">
+
+                     <div class="row">
+                       <div class="form-group col-lg-6">
+                         <label>Vehicle Title</label>
+                         <input type="text" name="VehiclesTitle" class="form-control" value="{{vehicle.VehiclesTitle}}">
+                       </div>
+
+                       <div class="form-group col-lg-6">
+                        <label>Brand</label>
+                           <select name="VehiclesBrand" class="form-control" id="VehiclesBrand">
+                               <option value="{{vehicle.VehiclesBrand.id}}">{{vehicle.VehiclesBrand.BrandName}}</option>
+                               {% for i in brands %}
+                               <option value="{{i.id}}">{{i.BrandName}}</option>
+                               {% endfor %}
+                           </select>
+                       </div>
+                     </div>
+
+                     <div class="row">
+                        <div class="form-group col-lg-12">
+                             <label>Vehical Overview</label>
+                             <textarea name="VehiclesOverview" class="form-control">{{vehicle.VehiclesOverview}}</textarea>
+                        </div>
+                     </div>
+
+                     <div class="row">
+                       <div class="form-group col-lg-6">
+                         <label>Price Per Day(In Rs.)</label>
+                         <input type="text" name="PricePerDay" class="form-control" value="{{vehicle.PricePerDay}}">
+                       </div>
+
+                       <div class="form-group col-lg-6">
+                        <label>Select Fuel Type</label>
+                        <select name="FuelType" class="form-control">
+                            <option value="{{vehicle.FuelType}}">{{vehicle.FuelType}}</option>
+                            <option value="Petrol">Petrol</option>
+                            <option value="Diesel">Diesel</option>
+                        </select>
+                       </div>
+                     </div>
+
+                     <div class="row">
+                       <div class="form-group col-lg-6">
+                         <label>Model Year</label>
+                         <input type="text" name="ModelYear" class="form-control" value="{{vehicle.ModelYear}}">
+                       </div>
+                     </div>
+
+                     <h4 style="color: red">Upload Images</h4>
+                     <br>
+                     <div class="row">
+                       <div class="form-group col-lg-3">
+                         <label>Image 1</label>
+                         <input type="file" name="Vimage1" class="form-control">
+                       </div>
+                       <div class="form-group col-lg-3">
+                         <img src="{{vehicle.Vimage1.url}}" name="Vimage1" height="100" width="100">
+                       </div>
+
+                       <div class="form-group col-lg-3">
+                         <label>Image 2</label>
+                         <input type="file" name="Vimage2" class="form-control">
+                       </div>
+                       <div class="form-group col-lg-3">
+                         <img src="{{vehicle.Vimage2.url}}" name="Vimage2" height="100" width="100">
+                       </div>
+
+                       <div class="form-group col-lg-3">
+                         <label>Image 3</label>
+                         <input type="file" name="Vimage3" class="form-control">
+                       </div>
+                       <div class="form-group col-lg-3">
+                         <img src="{{vehicle.Vimage3.url}}" name="Vimage3" height="100" width="100">
+                       </div>
+
+                       <div class="form-group col-lg-3">
+                         <label>Image 4</label>
+                         <input type="file" name="Vimage4" class="form-control">
+                       </div>
+                       <div class="form-group col-lg-3">
+                         <img src="{{vehicle.Vimage4.url}}" name="Vimage4" height="100" width="100">
+                       </div>
+
+                       <div class="form-group col-lg-3">
+                         <label>Image 5</label>
+                         <input type="file" name="Vimage5" class="form-control">
+                       </div>
+                       <div class="form-group col-lg-3">
+                         <img src="{{vehicle.Vimage5.url}}" name="Vimage5" height="100" width="100">
+                       </div>
+                     </div>
+
+
+                    <h4 style="color: red">Accessories</h4>
+                     <br>
+                     <div class="row">
+                       {% if vehicle.ShutterLock == "yes" %}
+                       <div class="input-checkbox col-lg-3">
+                           <label class="label-checkbox">
+                            <input type="checkbox" name="ShutterLock" id="ShutterLock" checked value="yes">
+                            <span>Shutter Lock</span>
+                           </label>
+                       </div>
+                       {% else %}
+                       <div class="input-checkbox col-lg-3">
+                           <label class="label-checkbox">
+                            <input type="checkbox" name="ShutterLock" id="ShutterLock" value="yes">
+                            <span>Shutter Lock</span>
+                           </label>
+                       </div>
+                       {% endif %}
+
+                       {% if vehicle.ExternalFuelFilling == "yes" %}
+                       <div class="input-checkbox col-lg-3">
+                           <label class="label-checkbox">
+                            <input type="checkbox" name="ExternalFuelFilling" id="ExternalFuelFilling" checked value="yes">
+                            <span>External Fuel Filling</span>
+                           </label>
+                       </div>
+                       {% else %}
+                       <div class="input-checkbox col-lg-3">
+                           <label class="label-checkbox">
+                            <input type="checkbox" name="ExternalFuelFilling" id="ExternalFuelFilling" value="yes">
+                            <span>External Fuel Filling</span>
+                           </label>
+                       </div>
+                       {% endif %}
+
+                       {% if vehicle.PassSwitch == "yes" %}
+                       <div class="input-checkbox col-lg-3">
+                           <label class="label-checkbox">
+                            <input type="checkbox" name="PassSwitch" id="PassSwitch" checked value="yes">
+                            <span>Pass Switch</span>
+                           </label>
+                       </div>
+                       {% else %}
+                       <div class="input-checkbox col-lg-3">
+                           <label class="label-checkbox">
+                            <input type="checkbox" name="PassSwitch" id="PassSwitch" value="yes">
+                            <span>Pass Switch</span>
+                           </label>
+                       </div>
+                       {% endif %}
+
+                       {% if vehicle.LEDTailLights == "yes" %}
+                       <div class="input-checkbox col-lg-3">
+                           <label class="label-checkbox">
+                            <input type="checkbox" name="LEDTailLights" id="LEDTailLights" checked value="yes">
+                            <span>LED Tail Lights</span>
+                           </label>
+                       </div>
+                       {% else %}
+                       <div class="input-checkbox col-lg-3">
+                           <label class="label-checkbox">
+                            <input type="checkbox" name="LEDTailLights" id="LEDTailLights" value="yes">
+                            <span>LED Tail Lights</span>
+                           </label>
+                       </div>
+                       {% endif %}
+                     </div>
+
+                     <div class="row">
+                       {% if vehicle.LowFuelIndicator == "yes" %}
+                       <div class="input-checkbox col-lg-3">
+                           <label class="label-checkbox">
+                            <input type="checkbox" name="LowFuelIndicator" id="LowFuelIndicator" checked value="yes">
+                            <span>Low Fuel Indicator</span>
+                           </label>
+                       </div>
+                       {% else %}
+                       <div class="input-checkbox col-lg-3">
+                           <label class="label-checkbox">
+                            <input type="checkbox" name="LowFuelIndicator" id="LowFuelIndicator" value="yes">
+                            <span>Low Fuel Indicator</span>
+                           </label>
+                       </div>
+                       {% endif %}
+
+                       {% if vehicle.PilotLamps == "yes" %}
+                       <div class="input-checkbox col-lg-3">
+                           <label class="label-checkbox">
+                            <input type="checkbox" name="PilotLamps" id="PilotLamps" checked value="yes">
+                            <span>Pilot Lamps</span>
+                           </label>
+                       </div>
+                       {% else %}
+                       <div class="input-checkbox col-lg-3">
+                           <label class="label-checkbox">
+                            <input type="checkbox" name="PilotLamps" id="PilotLamps" value="yes">
+                            <span>Pilot Lamps</span>
+                           </label>
+                       </div>
+                       {% endif %}
+
+                       {% if vehicle.RadialTyre == "yes" %}
+                       <div class="input-checkbox col-lg-3">
+                           <label class="label-checkbox">
+                            <input type="checkbox" name="RadialTyre" id="RadialTyre" checked value="yes">
+                            <span>Radial Tyre</span>
+                           </label>
+                       </div>
+                       {% else %}
+                       <div class="input-checkbox col-lg-3">
+                           <label class="label-checkbox">
+                            <input type="checkbox" name="RadialTyre" id="RadialTyre" value="yes">
+                            <span>Radial Tyre</span>
+                           </label>
+                       </div>
+                       {% endif %}
+
+                       {% if vehicle.DiscBrake == "yes" %}
+                       <div class="input-checkbox col-lg-3">
+                           <label class="label-checkbox">
+                            <input type="checkbox" name="DiscBrake" id="DiscBrake" checked value="yes">
+                            <span>Disc Brake</span>
+                           </label>
+                       </div>
+                       {% else %}
+                       <div class="input-checkbox col-lg-3">
+                           <label class="label-checkbox">
+                            <input type="checkbox" name="DiscBrake" id="DiscBrake" value="yes">
+                            <span>Disc Brake</span>
+                           </label>
+                       </div>
+                       {% endif %}
+                     </div>
+
+                    </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Update</button>
+              </div>
+            </form>
+         </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+{% if error == "no" %}
+<script>
+    alert('Bike Details has been Updated');
+    window.location=('{% url 'manageVehicle' %}');
+</script>
+{% endif %}
+{% if error == "yes" %}
+<script>
+    alert('Something Went Wrong. Please try again');
+</script>
+{% endif %}
+
+{% endblock %}
